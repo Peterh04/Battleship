@@ -20,38 +20,20 @@ const createGameBoard = function createGameBoard() {
 
   const placeShip = function placeShip(ship, row, col, position) {
     if (row < 0 || row >= 10 || col < 0 || col >= 10)
-      throw new Error("Out of bonds");
+      throw new Error("Out of bounds");
 
-    if (position === "horizontal") {
-      if (my2DArray[row][col] === "x") {
-        let toFillCol = ship.length;
-        let totalColRow = my2DArray[0].length;
-        if (totalColRow - col >= toFillCol) {
-          for (let i = 0; i < toFillCol; i++) {
-            my2DArray[row][col] = ship.name;
-            col++;
-          }
-        } else {
-          throw new Error("Can't fit");
-        }
-      } else {
-        throw new Error("The space is already occupied!");
-      }
-    } else {
-      if (my2DArray[row][col] === "x") {
-        let toFillCol = ship.length;
-        let totalColRow = my2DArray[0].length;
-        if (totalColRow - row >= toFillCol) {
-          for (let i = 0; i < toFillCol; i++) {
-            my2DArray[row][col] = ship.name;
-            row++;
-          }
-        } else {
-          throw new Error("Can't fit");
-        }
-      } else {
-        throw new Error("The space is already occupied!");
-      }
+    if (!canFit(ship.length, row, col, position, 10)) {
+      throw new Error("Can't fit");
+    }
+
+    if (!pathEmpty(ship.length, row, col, position, my2DArray)) {
+      throw new Error("The space is already occupied!");
+    }
+
+    for (let i = 0; i < ship.length; i++) {
+      my2DArray[row][col] = ship.name;
+      if (position === "horizontal") col++;
+      else row++;
     }
   };
 
@@ -63,27 +45,31 @@ const createGameBoard = function createGameBoard() {
 
 export { createGameBoard };
 
-//  const placeShip = function placeShip(ship, row, col) {
-//     if (my2DArray[row][col] === "x") {
-//       let toFillCol = ship.length;
-//       for (let i = 0; i <= toFillCol; i++) {
-//         my2DArray[row][col] = ship.name;
-//         col++;
-//       }
-//     }
-//   };
+//canFit Helper
+const canFit = function canFit(shipLength, row, col, position, boardSize = 10) {
+  if (position === "horizontal") {
+    return shipLength + col <= boardSize;
+  } else if (position === "vertical") {
+    return shipLength + row <= boardSize;
+  }
+  return false;
+};
 
-//  const placeShip = function placeShip(ship, row, col) {
-//     if (my2DArray[row][col] === "x") {
-//       let toFillCol = ship.length;
-//       let totalColRow = my2DArray[0].length;
-//       for (let i = 0; i <= toFillCol; i++) {
-//         if (totalColRow - col >= toFillCol) {
-//           my2DArray[row][col] = ship.name;
-//           col++;
-//         } else {
-//           throw new Error("Can't fit");
-//         }
-//       }
-//     }
-//   };
+//pathEmpty Helper
+const pathEmpty = function pathEmpty(shipLength, row, col, postion, board) {
+  if (postion === "horizontal") {
+    for (let i = 0; i < shipLength; i++) {
+      if (board[row][col + i] !== "x") {
+        return false;
+      }
+    }
+    return true;
+  } else if (postion === "vertical") {
+    for (let i = 0; i < shipLength; i++) {
+      if (board[row + i][col] !== "x") {
+        return false;
+      }
+    }
+    return true;
+  }
+};

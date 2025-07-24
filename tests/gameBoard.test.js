@@ -5,13 +5,13 @@ describe("createGameBoard", () => {
   it("should contain 10rows", () => {
     expect(createGameBoard().my2DArray.length).toBe(10);
   });
-  it("should contain 10collumns per each row", () => {
+  it("should contain 10 columns per each row", () => {
     expect(createGameBoard().my2DArray[0].length).toBe(10);
     expect(createGameBoard().my2DArray[1].length).toBe(10);
     expect(createGameBoard().my2DArray[2].length).toBe(10);
   });
 
-  it("should place ships at the right coordinates verttical or horizontal", () => {
+  it("should place ships at the right coordinates vertical or horizontal", () => {
     const gameBoard1 = createGameBoard();
     const carrier = createShip("Carrier", 5);
     const patrolBoat = createShip("Patrol Boat", 2);
@@ -24,11 +24,11 @@ describe("createGameBoard", () => {
     expect(gameBoard1.my2DArray[0][3]).toBe("Carrier");
     expect(gameBoard1.my2DArray[0][4]).toBe("Carrier");
 
-    gameBoard1.placeShip(patrolBoat, 5, 0, "verttical");
+    gameBoard1.placeShip(patrolBoat, 5, 0, "vertical");
     expect(gameBoard1.my2DArray[5][0]).toBe("Patrol Boat");
     expect(gameBoard1.my2DArray[6][0]).toBe("Patrol Boat");
 
-    gameBoard1.placeShip(destroyer, 3, 1, "verttical");
+    gameBoard1.placeShip(destroyer, 3, 1, "vertical");
     expect(gameBoard1.my2DArray[3][1]).toBe("Destroyer");
     expect(gameBoard1.my2DArray[4][1]).toBe("Destroyer");
     expect(gameBoard1.my2DArray[5][1]).toBe("Destroyer");
@@ -51,18 +51,18 @@ describe("createGameBoard", () => {
     );
   });
 
-  it("should disallow placing ships out of bonds", () => {
+  it("should disallow placing ships out of bounds", () => {
     const submarine = createShip("Submarine", 3);
     const gameBoard1 = createGameBoard();
 
     expect(() => gameBoard1.placeShip(submarine, -1, 5, "horizontal")).toThrow(
-      "Out of bonds"
+      "Out of bounds"
     );
     expect(() => gameBoard1.placeShip(submarine, 1, 11, "horizontal")).toThrow(
-      "Out of bonds"
+      "Out of bounds"
     );
     expect(() => gameBoard1.placeShip(submarine, 1, -5, "horizontal")).toThrow(
-      "Out of bonds"
+      "Out of bounds"
     );
   });
 
