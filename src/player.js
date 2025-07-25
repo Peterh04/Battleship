@@ -1,0 +1,11 @@
+import { createGameBoard } from "./gameBoard";
+
+const createPlayer = function createPlayer(playerName) {
+  const playerGameBoard = createGameBoard();
+  return {
+    playerName,
+    playerGameBoard,
+  };
+};
+
+export { createPlayer };

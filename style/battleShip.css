@@ -1,0 +1,102 @@
+:root {
+  --main-color-400: #f1faee;
+  --main-color-200: #fdfdfd;
+
+  --secondary-color-800: #429294;
+  --secondary-color-600: #7dafb1;
+  --secondary-color-400: #a8dadc;
+  --secondary-color-200: #bdecee;
+  --secondary-color-100: #cdfdff;
+
+  --gameBoard-primary-color-600: #3a2878;
+  --gameBoard-primary-color-400: #4b3f72;
+  --gameBoard-primary-color-200: #7667a7;
+  --gameBoard-primary-color-100: #a291da;
+
+  --gameBoard-secondary-color-400: #ffc857;
+  --gameBoard-secondary-color-200: #f7d289;
+}
+
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+body {
+  display: flex;
+
+  margin: 0;
+
+  background: linear-gradient(to bottom, #015871 0%, #3ca6b2 50%, #f4e7d0 100%);
+}
