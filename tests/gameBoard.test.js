@@ -189,20 +189,3 @@ describe("createGameBoard", () => {
     ).toBeTruthy();
   });
 });
-
-// it("should allow ships to receiveAttack", () => {
-//   const gameBoard1 = createGameBoard();
-//   const patrolBoat = createShip("Patrol Boat", 2);
-//   const destroyer = createShip("Destroyer", 3);
-
-//   gameBoard1.placeShip(patrolBoat, 1, 0, "horizontal");
-//   gameBoard1.receiveAttack(patrolBoat, 1, 0);
-
-//   expect(patrolBoat.hitNumber).toBe(1);
-
-//   gameBoard1.placeShip(destroyer, 0, 2, "vertical");
-//   gameBoard1.receiveAttack(destroyer, 0, 2);
-//   gameBoard1.receiveAttack(destroyer, 1, 2);
-
-//   expect(destroyer.hitNumber).toBe(2);
-// });
