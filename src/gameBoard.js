@@ -1,5 +1,5 @@
-import { createShip } from "./ship";
-import { canFit, pathEmpty } from "./utils/boardUtils";
+import { createShip } from "./ship.js";
+import { canFit, pathEmpty } from "./utils/boardUtils.js";
 
 const createGameBoard = function createGameBoard() {
   const carrier = createShip("Carrier", 5);
@@ -34,22 +34,21 @@ const createGameBoard = function createGameBoard() {
     }
     for (let i = 0; i < ship.length; i++) {
       if (position === "horizontal") {
-        my2DArray[row][col + i] = ship.name;
+        my2DArray[row][col + i] = ship;
       } else {
-        my2DArray[row + i][col] = ship.name;
+        my2DArray[row + i][col] = ship;
       }
     }
   };
 
-  const receiveAttack = function receiveAttack(ship, row, col) {
-    if (my2DArray[row][col] === ship.name) {
-      ship.hit();
-    } else if (my2DArray[row][col] === "missed") {
+  const receiveAttack = function receiveAttack(row, col) {
+    const cell = my2DArray[row][col];
+    if (typeof cell === "object" && cell !== null && cell.hit) {
+      cell.hit();
+    } else if (cell === "missed") {
       throw new Error("You can't attack here");
     } else my2DArray[row][col] = "missed";
   };
-
-  // const allShipSunk = function allShipSunk(ship1, ship2, ship3, ship4) {};
 
   return {
     my2DArray,

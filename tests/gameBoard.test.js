@@ -18,20 +18,20 @@ describe("createGameBoard", () => {
     const destroyer = createShip("Destroyer", 3);
 
     gameBoard1.placeShip(carrier, 0, 0, "horizontal");
-    expect(gameBoard1.my2DArray[0][0]).toBe("Carrier");
-    expect(gameBoard1.my2DArray[0][1]).toBe("Carrier");
-    expect(gameBoard1.my2DArray[0][2]).toBe("Carrier");
-    expect(gameBoard1.my2DArray[0][3]).toBe("Carrier");
-    expect(gameBoard1.my2DArray[0][4]).toBe("Carrier");
+    expect(gameBoard1.my2DArray[0][0].name).toBe("Carrier");
+    expect(gameBoard1.my2DArray[0][1].name).toBe("Carrier");
+    expect(gameBoard1.my2DArray[0][2].name).toBe("Carrier");
+    expect(gameBoard1.my2DArray[0][3].name).toBe("Carrier");
+    expect(gameBoard1.my2DArray[0][4].name).toBe("Carrier");
 
     gameBoard1.placeShip(patrolBoat, 5, 0, "vertical");
-    expect(gameBoard1.my2DArray[5][0]).toBe("Patrol Boat");
-    expect(gameBoard1.my2DArray[6][0]).toBe("Patrol Boat");
+    expect(gameBoard1.my2DArray[5][0].name).toBe("Patrol Boat");
+    expect(gameBoard1.my2DArray[6][0].name).toBe("Patrol Boat");
 
     gameBoard1.placeShip(destroyer, 3, 1, "vertical");
-    expect(gameBoard1.my2DArray[3][1]).toBe("Destroyer");
-    expect(gameBoard1.my2DArray[4][1]).toBe("Destroyer");
-    expect(gameBoard1.my2DArray[5][1]).toBe("Destroyer");
+    expect(gameBoard1.my2DArray[3][1].name).toBe("Destroyer");
+    expect(gameBoard1.my2DArray[4][1].name).toBe("Destroyer");
+    expect(gameBoard1.my2DArray[5][1].name).toBe("Destroyer");
   });
 
   it("should disallow placing larges ships at small left coordinates ", () => {
@@ -84,13 +84,14 @@ describe("createGameBoard", () => {
     const destroyer = createShip("Destroyer", 3);
 
     gameBoard1.placeShip(patrolBoat, 1, 0, "horizontal");
-    gameBoard1.receiveAttack(patrolBoat, 1, 0);
+
+    gameBoard1.receiveAttack(1, 0);
 
     expect(patrolBoat.hitNumber).toBe(1);
 
     gameBoard1.placeShip(destroyer, 0, 2, "vertical");
-    gameBoard1.receiveAttack(destroyer, 0, 2);
-    gameBoard1.receiveAttack(destroyer, 1, 2);
+    gameBoard1.receiveAttack(0, 2);
+    gameBoard1.receiveAttack(1, 2);
 
     expect(destroyer.hitNumber).toBe(2);
   });
@@ -101,9 +102,9 @@ describe("createGameBoard", () => {
     const destroyer = createShip("Destroyer", 3);
 
     gameBoard1.placeShip(patrolBoat, 1, 0, "horizontal");
-    gameBoard1.receiveAttack(patrolBoat, 1, 0);
-    gameBoard1.receiveAttack(patrolBoat, 2, 0);
-    gameBoard1.receiveAttack(patrolBoat, 2, 2);
+    gameBoard1.receiveAttack(1, 0);
+    gameBoard1.receiveAttack(2, 0);
+    gameBoard1.receiveAttack(2, 2);
 
     expect(gameBoard1.my2DArray[1][0] === "missed").toBeFalsy();
     expect(gameBoard1.my2DArray[2][0] === "missed").toBeTruthy();
@@ -116,14 +117,14 @@ describe("createGameBoard", () => {
     const destroyer = createShip("Destroyer", 3);
 
     gameBoard1.placeShip(patrolBoat, 1, 0, "horizontal");
-    gameBoard1.receiveAttack(patrolBoat, 1, 0);
-    gameBoard1.receiveAttack(patrolBoat, 2, 0);
-    gameBoard1.receiveAttack(patrolBoat, 2, 2);
+    gameBoard1.receiveAttack(1, 0);
+    gameBoard1.receiveAttack(2, 0);
+    gameBoard1.receiveAttack(2, 2);
 
-    expect(() => gameBoard1.receiveAttack(patrolBoat, 2, 0)).toThrow(
+    expect(() => gameBoard1.receiveAttack(2, 0)).toThrow(
       "You can't attack here"
     );
-    expect(() => gameBoard1.receiveAttack(patrolBoat, 2, 2)).toThrow(
+    expect(() => gameBoard1.receiveAttack(2, 2)).toThrow(
       "You can't attack here"
     );
   });
@@ -153,27 +154,27 @@ describe("createGameBoard", () => {
     gameBoard2.placeShip(submarine, 3, 0, "horizontal");
     gameBoard2.placeShip(patrolBoat, 4, 0, "horizontal");
 
-    gameBoard2.receiveAttack(carrier, 0, 0);
-    gameBoard2.receiveAttack(carrier, 0, 1);
-    gameBoard2.receiveAttack(carrier, 0, 2);
-    gameBoard2.receiveAttack(carrier, 0, 3);
-    gameBoard2.receiveAttack(carrier, 0, 4);
+    gameBoard2.receiveAttack(0, 0);
+    gameBoard2.receiveAttack(0, 1);
+    gameBoard2.receiveAttack(0, 2);
+    gameBoard2.receiveAttack(0, 3);
+    gameBoard2.receiveAttack(0, 4);
 
-    gameBoard2.receiveAttack(battleship, 1, 0);
-    gameBoard2.receiveAttack(battleship, 1, 1);
-    gameBoard2.receiveAttack(battleship, 1, 2);
-    gameBoard2.receiveAttack(battleship, 1, 3);
+    gameBoard2.receiveAttack(1, 0);
+    gameBoard2.receiveAttack(1, 1);
+    gameBoard2.receiveAttack(1, 2);
+    gameBoard2.receiveAttack(1, 3);
 
-    gameBoard2.receiveAttack(destroyer, 2, 0);
-    gameBoard2.receiveAttack(destroyer, 2, 1);
-    gameBoard2.receiveAttack(destroyer, 2, 2);
+    gameBoard2.receiveAttack(2, 0);
+    gameBoard2.receiveAttack(2, 1);
+    gameBoard2.receiveAttack(2, 2);
 
-    gameBoard2.receiveAttack(submarine, 3, 0);
-    gameBoard2.receiveAttack(submarine, 3, 1);
-    gameBoard2.receiveAttack(submarine, 3, 2);
+    gameBoard2.receiveAttack(3, 0);
+    gameBoard2.receiveAttack(3, 1);
+    gameBoard2.receiveAttack(3, 2);
 
-    gameBoard2.receiveAttack(patrolBoat, 4, 0);
-    gameBoard2.receiveAttack(patrolBoat, 4, 1);
+    gameBoard2.receiveAttack(4, 0);
+    gameBoard2.receiveAttack(4, 1);
 
     console.log(submarine.isSunk);
 
@@ -188,3 +189,20 @@ describe("createGameBoard", () => {
     ).toBeTruthy();
   });
 });
+
+// it("should allow ships to receiveAttack", () => {
+//   const gameBoard1 = createGameBoard();
+//   const patrolBoat = createShip("Patrol Boat", 2);
+//   const destroyer = createShip("Destroyer", 3);
+
+//   gameBoard1.placeShip(patrolBoat, 1, 0, "horizontal");
+//   gameBoard1.receiveAttack(patrolBoat, 1, 0);
+
+//   expect(patrolBoat.hitNumber).toBe(1);
+
+//   gameBoard1.placeShip(destroyer, 0, 2, "vertical");
+//   gameBoard1.receiveAttack(destroyer, 0, 2);
+//   gameBoard1.receiveAttack(destroyer, 1, 2);
+
+//   expect(destroyer.hitNumber).toBe(2);
+// });
