@@ -41,6 +41,18 @@ const createGameBoard = function createGameBoard() {
     }
   };
 
+  const isShipSunk = function isShipSunk(row, col) {
+    const cell = my2DArray[row][col];
+    if (typeof cell == "object") {
+      const ship = cell;
+      if (ship.isSunk()) {
+        console.log(`${cell.name} has sunk`);
+      }
+      return;
+    }
+    return;
+  };
+
   const receiveAttack = function receiveAttack(row, col) {
     const cell = my2DArray[row][col];
     if (typeof cell === "object" && cell !== null && cell.hit) {
@@ -54,6 +66,7 @@ const createGameBoard = function createGameBoard() {
     my2DArray,
     placeShip,
     receiveAttack,
+    isShipSunk,
     allShipSunk(...ships) {
       return ships.every((ship) => ship.isSunk());
     },

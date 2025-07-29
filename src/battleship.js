@@ -55,9 +55,21 @@ enemyBoard.addEventListener("click", (e) => {
 
   player2GameBoard.receiveAttack(row, col);
 
+  player2GameBoard.isShipSunk(row, col);
+
   renderBoard(
     player2GameBoard.my2DArray,
     document.getElementById("enemy-board"),
     true
   );
 });
+
+// if (
+//   carrier.isSunk() ||
+//   battleship.isSunk() ||
+//   destroyer.isSunk() ||
+//   submarine.isSunk() ||
+//   patrolBoat.isSunk()
+// ) {
+//   console.log("Boat sunk");
+// }

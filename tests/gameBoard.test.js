@@ -176,8 +176,6 @@ describe("createGameBoard", () => {
     gameBoard2.receiveAttack(4, 0);
     gameBoard2.receiveAttack(4, 1);
 
-    console.log(submarine.isSunk);
-
     expect(
       gameBoard2.allShipSunk(
         carrier,
